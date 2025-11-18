@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pandas
+scikit-learn
+
+# for backend
+# (venv) allyan@allyan:~/Downloads/T8Launchpad/Projects/movie_recommendation_system$ uvicorn backend.main:app --reload
+
+# for frontend
+# (venv) allyan@allyan:~/Downloads/T8Launchpad/Projects/movie_recommendation_system/frontend$ python3 -m http.server 5500
