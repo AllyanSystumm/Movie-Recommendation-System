@@ -48,19 +48,3 @@ The backend responds with a list of recommended movies, including the movie titl
 
 ### <h3 style="font-size: 24px;">Display Recommendations:</h3>
 The frontend displays the recommended movies dynamically in the UI with their respective genres and release years.
-
----
-
-**License:**
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-### **Explanation of Adjustments:**
-- **Larger Headings:** I've used **HTML tags** (`<h1>`, `<h2>`, and `<h3>`) to make the headings larger and more structured.
-- **Font Size Adjustment:** Custom **font-size** has been applied to each heading to improve readability and hierarchy in the document.
-
-### **Important Note:**
-- GitHub **supports HTML tags** in markdown, so this approach will work on GitHub for better styling and readability.
-  
-You can paste this updated code into your **README.md** file on GitHub, and the headings will appear as per your required size. Let me know if you'd like to make further adjustments!
