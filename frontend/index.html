@@ -1,52 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Recommendation System</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineMatch - Smart Recommendations</title>
+
+    <!-- Google Fonts: Poppins & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        netflixRed: '#E50914',
+                        netflixRedHover: '#F40612',
+                        darkBg: '#141414',
+                        darkerBg: '#0b0b0b',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyve4z7JP7X0.jpg')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.7);
+            }
+            .text-shadow-sm {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+        }
+        
+        body {
+            @apply bg-darkBg text-white overflow-x-hidden antialiased font-sans;
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    <header>
-        <div class="container">
-            <h1>Movie Recommendation System</h1>
-            <p>Discover new movies based on your interests!</p>
+    <!-- Navbar -->
+    <nav id="navbar"
+        class="fixed top-0 w-full z-50 transition-all duration-300 px-4 py-4 md:px-12 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent">
+        <div class="flex items-center gap-12">
+            <h1 class="text-netflixRed text-3xl md:text-4xl font-extrabold tracking-wide cursor-pointer text-shadow-sm">
+                CINEMATCH</h1>
+            <div class="hidden md:flex gap-6 text-gray-300 text-sm font-medium">
+                <a href="#" class="hover:text-white transition hover:scale-105">Home</a>
+                <a href="#" class="hover:text-white transition hover:scale-105">TV Shows</a>
+                <a href="#" class="hover:text-white transition hover:scale-105">Movies</a>
+                <a href="#" class="hover:text-white transition hover:scale-105">My List</a>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <div class="relative group">
+                <div
+                    class="flex items-center bg-black/40 border border-white/20 rounded-full px-3 py-1.5 focus-within:bg-black/80 focus-within:border-white/80 transition-all duration-300">
+                    <i class="fas fa-search text-gray-400 mr-2 group-focus-within:text-white"></i>
+                    <input type="text" id="search-input" placeholder="Titles, people, genres"
+                        class="bg-transparent border-none outline-none text-white text-sm w-32 focus:w-64 transition-all duration-500 placeholder-gray-400 group-focus-within:placeholder-gray-200" />
+                </div>
+                <button id="search-btn" class="hidden"></button> <!-- Helper for click events inside -->
+            </div>
+            <div
+                class="w-8 h-8 rounded bg-blue-600 flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-white transition">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-[85vh] w-full bg-hero-pattern bg-cover bg-center">
+        <!-- Main Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-darkBg via-darkBg/60 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-transparent to-transparent"></div>
+
+        <div class="relative z-10 flex flex-col justify-center h-full px-4 md:px-12 max-w-3xl pt-20">
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-4 text-shadow animate-[fadeUp_1s_ease-out]">
+                Movie Recommendations
+            </h1>
+            <p
+                class="text-lg md:text-xl text-gray-200 mb-8 max-w-lg leading-relaxed text-shadow-sm animate-[fadeUp_1.2s_ease-out]">
+                Discover your next favorite movie. Our AI-powered engine finds the perfect match for your specific
+                taste.
+            </p>
+            <div class="flex gap-4 animate-[fadeUp_1.4s_ease-out]">
+                <button
+                    class="bg-white text-black px-8 py-3 rounded font-bold flex items-center gap-2 hover:bg-opacity-90 transition transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-play"></i> Play
+                </button>
+                <button
+                    class="bg-gray-500/70 text-white px-8 py-3 rounded font-bold flex items-center gap-2 backdrop-blur-sm hover:bg-gray-500/90 transition transform hover:scale-105 border border-white/10">
+                    <i class="fas fa-info-circle"></i> More Info
+                </button>
+            </div>
         </div>
     </header>
 
-    <div class="main-content">
-        <div class="actions">
-            <button onclick="loadMovies()" class="load-btn">Load All Movies</button>
-            <button onclick="clearMovies()" class="clear-btn">Clear Movies</button>
+    <main class="relative z-20 -mt-24 pb-20 px-4 md:px-12 space-y-12">
+
+        <!-- Recommendations Section (Hidden initially) -->
+        <section id="recommendations-section" class="hidden transition-opacity duration-700">
+            <h2 class="text-2xl font-semibold mb-4 text-white pl-3 border-l-4 border-netflixRed">Because you searched...
+            </h2>
+            <div id="recommendations-container" class="flex overflow-x-auto gap-4 pb-8 hide-scrollbar scroll-smooth">
+                <!-- Recommendations will be injected here -->
+            </div>
+        </section>
+
+        <!-- Dynamic Genre Rows -->
+        <div id="genre-rows" class="space-y-12">
+            <!-- Rows like "Action", "Comedy" will be injected here -->
         </div>
 
-        <div class="search-container">
-            <label for="search-bar">Search Movies: </label>
-            <input type="text" id="search-bar" placeholder="Search by title or genre" oninput="searchMovies()">
-        </div>
-
-        <div class="recommendation-container">
-            <h2>Get Movie Recommendations</h2>
-            <label for="movie-title">Enter Movie Title: </label>
-            <input type="text" id="movie-title" placeholder="Enter movie title">
-            <button onclick="getRecommendations()">Get Recommendations</button>
-
-            <h3>Recommended Movies</h3>
-            <ul id="recommendations-list"></ul>
-        </div>
-
-        <div class="movies-container">
-            <h2>Movies List</h2>
-            <ul id="movies-list"></ul>
-        </div>
-    </div>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Movie Recommendations | All Rights Reserved</p>
-        </div>
-    </footer>
+    </main>
 
     <script src="script.js"></script>
 </body>
+
 </html>
